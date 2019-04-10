@@ -1,9 +1,8 @@
 <template>
   <div id="app" class="container is-widescreen">
     <div class="columns wrapper">
-      
-
       <ul class="column is-4 clients_list">
+        <SearchInput v-model="search" />
         <li @click.prevent="transition(l)" class="item" v-for="(l, index) in listItems" :key="index">
             <article class="media client_item">
               <figure class="media-left ">
@@ -29,16 +28,28 @@
 </template>
 
 <script>
-import ClientDetails from '@/components/ClientDetails.vue'
+import ClientDetails from '@/components/ClientDetails.vue';
+import SearchInput from '@/components/SearchInput.vue';
 
 export default {
   name: 'app',
+  data(){
+    return {
+      // listItems: []
+      search: ''
+    }
+  },
   components: {
-    ClientDetails
+    ClientDetails,
+    SearchInput
   },
   computed: {
-    listItems(){
-      return this.$store.getters.getClientList
+    listItems() {
+      let clients = this.$store.getters.getClientList;
+      return clients.filter(item => {
+        return item.general.firstName.toLowerCase().includes(this.search.toLowerCase()) 
+            || item.general.lastName.toLowerCase().includes(this.search.toLowerCase())
+      })
     },
     currentClient(){
       return this.$store.getters.getCurrentClient
@@ -87,8 +98,4 @@ html, body {
   height: 100vh;
   overflow-y: scroll; 
 }
-
-
-
-
 </style>

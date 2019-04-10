@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
     SET_CLIENT(state, payload){
       state.current_client = payload
-    }
+    },
   },
   actions: {
     GET_CLIENTS({commit}){

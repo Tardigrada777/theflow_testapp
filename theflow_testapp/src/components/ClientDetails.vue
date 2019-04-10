@@ -9,16 +9,20 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{ fullName }}</p>
-                    <p class="subtitle is-6"> {{ client.contact.email }} </p>
+                    <p class="subtitle is-6"> {{ client.job.title }} - {{ client.job.company }} </p>
                 </div>
             </div>
 
             <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                <h2 class="subtitle">Contacts</h2>
+                <p><strong>Email:</strong> {{ client.contact.email }}</p>
+                <p><strong>Phone number:</strong> {{ client.contact.phone }}</p>
+
+                <em>
+                    {{ client.address.street }} <br/>
+                    A City, {{ client.address.city }}, {{ client.address.zipCode }} <br/>
+                    {{ client.address.country }}
+                </em>
             </div>
         </div>
     </div>
