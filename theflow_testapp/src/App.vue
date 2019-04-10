@@ -21,7 +21,7 @@
               </div>
           </article>
         </li>
-        <button @click.prevent="page++" class="button is-primary more_btn"> Загрузить еще </button>
+        <button :disabled="isPaginationDisabled" @click.prevent="page++" class="button is-primary more_btn"> Загрузить еще </button>
       </ul>
       <ClientDetails class="column is-9" :client="currentClient" />
     </div>
@@ -46,12 +46,17 @@ export default {
     SearchInput
   },
   computed: {
+    isPaginationDisabled(){
+      return this.listItems.length < (this.page * this.size) ? true : false;
+    },
     listItems() {
+
       let clients = this.$store.getters.getClientList;
       return clients.filter(client => {
         return client.general.firstName.toLowerCase().includes(this.search.toLowerCase()) 
             || client.general.lastName.toLowerCase().includes(this.search.toLowerCase())
       }).splice(0, this.page * this.size)
+      
     },
     currentClient(){
       return this.$store.getters.getCurrentClient
