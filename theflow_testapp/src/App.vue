@@ -35,7 +35,6 @@ export default {
   name: 'app',
   data(){
     return {
-      // listItems: []
       search: ''
     }
   },
@@ -46,9 +45,9 @@ export default {
   computed: {
     listItems() {
       let clients = this.$store.getters.getClientList;
-      return clients.filter(item => {
-        return item.general.firstName.toLowerCase().includes(this.search.toLowerCase()) 
-            || item.general.lastName.toLowerCase().includes(this.search.toLowerCase())
+      return clients.filter(client => {
+        return client.general.firstName.toLowerCase().includes(this.search.toLowerCase()) 
+            || client.general.lastName.toLowerCase().includes(this.search.toLowerCase())
       })
     },
     currentClient(){
