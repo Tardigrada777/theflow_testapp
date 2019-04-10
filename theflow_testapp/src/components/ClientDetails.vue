@@ -23,6 +23,7 @@
                     A City, {{ client.address.city }}, {{ client.address.zipCode }} <br/>
                     {{ client.address.country }}
                 </em>
+                
             </div>
         </div>
     </div>

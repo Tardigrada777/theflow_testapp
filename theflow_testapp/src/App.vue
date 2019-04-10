@@ -21,6 +21,7 @@
               </div>
           </article>
         </li>
+        <button @click.prevent="page++" class="button is-primary more_btn"> Загрузить еще </button>
       </ul>
       <ClientDetails class="column is-9" :client="currentClient" />
     </div>
@@ -35,7 +36,9 @@ export default {
   name: 'app',
   data(){
     return {
-      search: ''
+      search: '',
+      page: 1,
+      size: 10
     }
   },
   components: {
@@ -48,7 +51,7 @@ export default {
       return clients.filter(client => {
         return client.general.firstName.toLowerCase().includes(this.search.toLowerCase()) 
             || client.general.lastName.toLowerCase().includes(this.search.toLowerCase())
-      })
+      }).splice(0, this.page * this.size)
     },
     currentClient(){
       return this.$store.getters.getCurrentClient
@@ -95,6 +98,11 @@ html, body {
 
 .clients_list{
   height: 100vh;
-  overflow-y: scroll; 
+  overflow-y: scroll;
+
+  .more_btn{
+    display: block;
+    margin: 0 auto;
+  } 
 }
 </style>
